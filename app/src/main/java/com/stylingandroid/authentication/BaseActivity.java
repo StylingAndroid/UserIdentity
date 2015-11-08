@@ -12,7 +12,7 @@ import javax.crypto.Cipher;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected static final byte[] SECRET_BYTES = new byte[]{1, 2, 3, 4, 5, 6, 7, 8};
+    static final byte[] SECRET_BYTES = new byte[]{1, 2, 3, 4, 5, 6, 7, 8};
 
     private View errorPanel;
     private TextView errorText;
