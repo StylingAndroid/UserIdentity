@@ -1,5 +1,7 @@
 package com.stylingandroid.authentication;
 
+import android.security.keystore.KeyPermanentlyInvalidatedException;
+import android.security.keystore.UserNotAuthenticatedException;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,5 +52,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public Cipher getUserAuthCipher() throws KeyToolsException {
         return keyTools.getUserAuthCipher();
+    }
+
+    public Cipher getTimedUserAuthCipher() throws KeyToolsException, UserNotAuthenticatedException, KeyPermanentlyInvalidatedException {
+        return keyTools.getTimedUserAuthCipher();
     }
 }

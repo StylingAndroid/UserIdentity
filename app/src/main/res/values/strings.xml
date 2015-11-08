@@ -6,4 +6,7 @@
     <string name="scan_now">Please scan your fingerprint…</string>
     <string name="validation_error">Fingerprint validation failed</string>
     <string name="secure_message">Congratulations!\n You got to the secure area.</string>
+    <string name="confirm_now">Confirming credentials…</string>
+    <string name="key_permantently_invalid">Keys were invalidated.\nPerhaps the lock screen was disabled.</string>
+    <string name="no_lockscreen">Error validating user.\nPerhaps no lock screen is configured.</string>
 </resources>

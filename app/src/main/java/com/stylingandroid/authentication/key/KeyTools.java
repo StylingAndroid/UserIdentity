@@ -18,11 +18,13 @@ public final class KeyTools {
 
     private static final String PROVIDER_NAME = "AndroidKeyStore";
     private static final String USER_AUTH_KEY_NAME = "com.stylingandroid.fingerprint.USER_AUTH_KEY";
+    private static final String TIMED_USER_AUTH_KEY_NAME = "com.stylingandroid.fingerprint.TIMED_USER_AUTH_KEY";
 
     private static final String ALGORITHM = KeyProperties.KEY_ALGORITHM_AES;
     private static final String BLOCK_MODE = KeyProperties.BLOCK_MODE_CBC;
     private static final String PADDING = KeyProperties.ENCRYPTION_PADDING_PKCS7;
     private static final String TRANSFORMATION = ALGORITHM + "/" + BLOCK_MODE + "/" + PADDING;
+    private static final int TIMEOUT = 30;
 
     private final KeyStore keyStore;
     private final Map<String, KeySpecGenerator> generators;
@@ -37,6 +39,7 @@ public final class KeyTools {
         }
         Map<String, KeySpecGenerator> generators = new ArrayMap<>();
         generators.put(USER_AUTH_KEY_NAME, new UserAuthKeySpecGenerator(BLOCK_MODE, PADDING));
+        generators.put(TIMED_USER_AUTH_KEY_NAME, new TimedUserAuthKeySpecGenerator(BLOCK_MODE, PADDING, TIMEOUT));
         return new KeyTools(keyStore, Collections.unmodifiableMap(generators));
     }
 
@@ -51,6 +54,10 @@ public final class KeyTools {
         } catch (Exception e) {
             throw new KeyToolsException("Error creating user authentication cipher", e);
         }
+    }
+
+    public Cipher getTimedUserAuthCipher() throws KeyToolsException, IllegalStateException, UserNotAuthenticatedException, KeyPermanentlyInvalidatedException {
+        return getCipher(TIMED_USER_AUTH_KEY_NAME);
     }
 
     private Cipher getCipher(String keyName) throws KeyToolsException, KeyPermanentlyInvalidatedException, UserNotAuthenticatedException,
