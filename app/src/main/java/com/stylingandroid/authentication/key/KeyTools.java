@@ -56,7 +56,8 @@ public final class KeyTools {
         }
     }
 
-    public Cipher getTimedUserAuthCipher() throws KeyToolsException, IllegalStateException, UserNotAuthenticatedException, KeyPermanentlyInvalidatedException {
+    public Cipher getTimedUserAuthCipher() throws KeyToolsException, IllegalStateException, UserNotAuthenticatedException,
+            KeyPermanentlyInvalidatedException {
         return getCipher(TIMED_USER_AUTH_KEY_NAME);
     }
 
