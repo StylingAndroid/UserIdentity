@@ -1,21 +1,19 @@
-package com.stylingandroid.authentication;
+package com.stylingandroid.identity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat.CryptoObject;
 import android.support.v4.os.CancellationSignal;
 
-import com.stylingandroid.authentication.key.KeyTools.KeyToolsException;
+import com.stylingandroid.identity.key.KeyTools.KeyToolsException;
 
 import javax.crypto.Cipher;
 
 public class FingerprintActivity extends BaseActivity {
-    private static final int USE_FINGERPRINT_REQUEST_CODE = 0;
 
     private FingerprintManagerCompat fingerprintManager;
     private AuthenticationCallback authenticationCallback = new AuthenticationCallback();
@@ -53,13 +51,6 @@ public class FingerprintActivity extends BaseActivity {
         super.onPause();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == USE_FINGERPRINT_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            authenticate();
-        }
-    }
-
     private void authenticate() {
         Cipher cipher;
         try {
@@ -75,7 +66,7 @@ public class FingerprintActivity extends BaseActivity {
 
     private void validate(Cipher cipher) {
         if (tryEncrypt(cipher)) {
-            startActivity(new Intent(this, SecureActivity.class));
+            startActivity(new Intent(this, UserIdentifiedActivity.class));
         } else {
             showError(R.string.validation_error);
         }
@@ -104,7 +95,7 @@ public class FingerprintActivity extends BaseActivity {
 
         @Override
         public void onAuthenticationFailed() {
-            showError(R.string.authenication_failed);
+            showError(R.string.identification_failed);
         }
     }
 }

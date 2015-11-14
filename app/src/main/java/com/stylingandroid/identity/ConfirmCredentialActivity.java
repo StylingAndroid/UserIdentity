@@ -1,4 +1,4 @@
-package com.stylingandroid.authentication;
+package com.stylingandroid.identity;
 
 import android.app.KeyguardManager;
 import android.content.Intent;
@@ -42,7 +42,7 @@ public class ConfirmCredentialActivity extends BaseActivity {
             e.printStackTrace();
             return;
         }
-        startActivity(new Intent(this, SecureActivity.class));
+        startActivity(new Intent(this, UserIdentifiedActivity.class));
     }
 
     private void showAuthenticationScreen() {

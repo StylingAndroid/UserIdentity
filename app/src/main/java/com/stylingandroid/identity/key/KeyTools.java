@@ -1,4 +1,4 @@
-package com.stylingandroid.authentication.key;
+package com.stylingandroid.identity.key;
 
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;

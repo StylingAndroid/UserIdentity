@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.stylingandroid.authentication">
+  package="com.stylingandroid.identity">
 
   <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
@@ -11,21 +11,21 @@
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name="com.stylingandroid.authentication.FingerprintActivity">
+    <activity android:name="com.stylingandroid.identity.FingerprintActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.stylingandroid.authentication.ConfirmCredentialActivity">
+    <activity android:name="com.stylingandroid.identity.ConfirmCredentialActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.stylingandroid.authentication.SecureActivity" />
+    <activity android:name="com.stylingandroid.identity.UserIdentifiedActivity" />
   </application>
 
 </manifest>

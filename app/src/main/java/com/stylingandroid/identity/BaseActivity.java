@@ -1,4 +1,4 @@
-package com.stylingandroid.authentication;
+package com.stylingandroid.identity;
 
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.UserNotAuthenticatedException;
@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.stylingandroid.authentication.key.KeyTools;
-import com.stylingandroid.authentication.key.KeyTools.KeyToolsException;
+import com.stylingandroid.identity.key.KeyTools;
+import com.stylingandroid.identity.key.KeyTools.KeyToolsException;
 
 import javax.crypto.Cipher;
 
