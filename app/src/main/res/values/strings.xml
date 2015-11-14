@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">User Authentication</string>
+    <string name="app_name">User Identity</string>
     <string name="no_fingerprint_hardware">This device does not have fingerprint scanning hardware,\nwhich is required for this app</string>
     <string name="no_fingerprints_enrolled">You do not have any fingerprints set up on this device.</string>
-    <string name="authenication_failed">Authentication failed</string>
+    <string name="identification_failed">Identification failed</string>
     <string name="scan_now">Please scan your fingerprint…</string>
     <string name="validation_error">Fingerprint validation failed</string>
-    <string name="secure_message">Congratulations!\n You got to the secure area.</string>
+    <string name="secure_message">Congratulations!\n You\'re the device owner.</string>
 </resources>

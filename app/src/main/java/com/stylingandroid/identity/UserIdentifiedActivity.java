@@ -1,13 +1,13 @@
-package com.stylingandroid.authentication;
+package com.stylingandroid.identity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class SecureActivity extends AppCompatActivity {
+public class UserIdentifiedActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secure);
+        setContentView(R.layout.activity_user_identified);
     }
 }
