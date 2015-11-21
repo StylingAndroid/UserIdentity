@@ -1,7 +1,9 @@
 package com.stylingandroid.identity;
 
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,5 +52,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public Cipher getUserAuthCipher() throws KeyToolsException {
         return keyTools.getUserAuthCipher();
+    }
+
+    protected void replaceContent(@LayoutRes int layoutId) {
+        setContentView(layoutId);
     }
 }

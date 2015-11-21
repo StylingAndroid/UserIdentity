@@ -3,14 +3,18 @@ package com.stylingandroid.identity.key;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
-import android.security.keystore.UserNotAuthenticatedException;
 import android.util.ArrayMap;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -48,26 +52,46 @@ public final class KeyTools {
     public Cipher getUserAuthCipher() throws KeyToolsException {
         try {
             return getCipher(USER_AUTH_KEY_NAME);
+        } catch (KeyPermanentlyInvalidatedException e) {
+            /*
+             * The invalid key has been removed from the keystore, so let's try and
+             * generate a new one.
+             */
+            try {
+                return getCipher(USER_AUTH_KEY_NAME);
+            } catch (Exception e1) {
+                throw new KeyToolsException("Error creating user authentication cipher", e1);
+            }
         } catch (Exception e) {
             throw new KeyToolsException("Error creating user authentication cipher", e);
         }
     }
 
-    private Cipher getCipher(String keyName) throws KeyToolsException, KeyPermanentlyInvalidatedException, UserNotAuthenticatedException,
-            IllegalStateException {
+    private Cipher getCipher(String keyName) throws NoSuchPaddingException, KeyToolsException, NoSuchAlgorithmException,
+            KeyStoreException, UnrecoverableKeyException, InvalidKeyException {
+        SecretKey secretKey = getKey(keyName);
+        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         try {
-            if (!keyStore.isKeyEntry(keyName)) {
-                createKey(keyName);
-            }
-            SecretKey secretKey = (SecretKey) keyStore.getKey(keyName, null);
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return cipher;
-        } catch (KeyPermanentlyInvalidatedException | UserNotAuthenticatedException | IllegalStateException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new KeyToolsException("Error creating cipher for " + keyName, e);
+        } catch (KeyPermanentlyInvalidatedException e) {
+            recreateKey(keyName);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         }
+        return cipher;
+    }
+
+    private SecretKey getKey(String keyName) throws KeyStoreException, KeyToolsException, UnrecoverableKeyException, NoSuchAlgorithmException {
+        if (!keyStore.isKeyEntry(keyName)) {
+            createKey(keyName);
+        }
+       return (SecretKey) keyStore.getKey(keyName, null);
+    }
+
+    private SecretKey recreateKey(String keyName) throws KeyStoreException, KeyToolsException, NoSuchAlgorithmException, UnrecoverableKeyException {
+        if (keyStore.isKeyEntry(keyName)) {
+            keyStore.deleteEntry(keyName);
+        }
+        return getKey(keyName);
     }
 
     private void createKey(String keyName) throws KeyToolsException, IllegalStateException {
