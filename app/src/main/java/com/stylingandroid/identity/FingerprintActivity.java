@@ -28,7 +28,7 @@ public class FingerprintActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        setContentView(R.layout.activity_fingerprint);
+        replaceContent(R.layout.activity_fingerprint);
         super.onResume();
 
         if (!fingerprintManager.isHardwareDetected()) {
