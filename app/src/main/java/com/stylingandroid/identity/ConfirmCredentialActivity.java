@@ -3,7 +3,6 @@ package com.stylingandroid.identity;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.UserNotAuthenticatedException;
 
 import javax.crypto.Cipher;
@@ -31,9 +30,6 @@ public class ConfirmCredentialActivity extends BaseActivity {
             cipher.doFinal(SECRET_BYTES);
         } catch (UserNotAuthenticatedException e) {
             showAuthenticationScreen();
-            return;
-        } catch (KeyPermanentlyInvalidatedException e) {
-            showError(R.string.key_permantently_invalid);
             return;
         } catch (IllegalStateException e) {
             showError(R.string.no_lockscreen);
