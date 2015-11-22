@@ -17,13 +17,13 @@ public class ConfirmCredentialActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credential);
 
         keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
     }
 
     @Override
     protected void onResume() {
+        replaceContent(R.layout.activity_credential);
         super.onResume();
 
         try {
