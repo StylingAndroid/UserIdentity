@@ -22,13 +22,13 @@ public class FingerprintActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fingerprint);
 
         fingerprintManager = FingerprintManagerCompat.from(this);
     }
 
     @Override
     protected void onResume() {
+        setContentView(R.layout.activity_fingerprint);
         super.onResume();
 
         if (!fingerprintManager.isHardwareDetected()) {
