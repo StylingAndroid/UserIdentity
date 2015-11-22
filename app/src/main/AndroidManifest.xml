@@ -20,14 +20,15 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.stylingandroid.identity.ConfirmCredentialActivity">
+    <activity
+      android:name="com.stylingandroid.identity.ConfirmCredentialActivity"
+      android:label="@string/confirm_credentials">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.stylingandroid.identity.UserIdentifiedActivity" />
   </application>
 
 </manifest>

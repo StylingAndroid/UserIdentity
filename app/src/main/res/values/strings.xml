@@ -7,6 +7,7 @@
     <string name="validation_error">Fingerprint validation failed</string>
     <string name="secure_message">Congratulations!\n You\'re the device owner.</string>
     <string name="confirm_now">Confirming credentials…</string>
+    <string name="confirm_credentials">Confirm Credentials</string>
     <string name="key_permantently_invalid">Keys were invalidated.\nPerhaps the lock screen was disabled.</string>
     <string name="no_lockscreen">Error validating user.\nPerhaps no lock screen is configured.</string>
 </resources>

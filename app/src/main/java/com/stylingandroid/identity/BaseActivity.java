@@ -4,6 +4,8 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.UserNotAuthenticatedException;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+
+import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.widget.TextView;
 
@@ -56,5 +58,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public Cipher getTimedUserAuthCipher() throws KeyToolsException, UserNotAuthenticatedException, KeyPermanentlyInvalidatedException {
         return keyTools.getTimedUserAuthCipher();
+    }
+
+    protected void replaceContent(@LayoutRes int layoutId) {
+        setContentView(layoutId);
     }
 }

@@ -1,7 +1,6 @@
 package com.stylingandroid.identity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -23,7 +22,7 @@ public class FingerprintActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fingerprint);
 
         fingerprintManager = FingerprintManagerCompat.from(this);
     }
@@ -56,7 +55,11 @@ public class FingerprintActivity extends BaseActivity {
         try {
             cipher = getUserAuthCipher();
         } catch (KeyToolsException e) {
+            e.printStackTrace();
             showError(e.getMessage());
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
         CryptoObject crypto = new CryptoObject(cipher);
@@ -66,7 +69,7 @@ public class FingerprintActivity extends BaseActivity {
 
     private void validate(Cipher cipher) {
         if (tryEncrypt(cipher)) {
-            startActivity(new Intent(this, UserIdentifiedActivity.class));
+            replaceContent(R.layout.activity_user_identified);
         } else {
             showError(R.string.validation_error);
         }

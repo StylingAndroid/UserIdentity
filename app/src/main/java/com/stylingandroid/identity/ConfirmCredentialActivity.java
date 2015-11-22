@@ -42,7 +42,7 @@ public class ConfirmCredentialActivity extends BaseActivity {
             e.printStackTrace();
             return;
         }
-        startActivity(new Intent(this, UserIdentifiedActivity.class));
+        replaceContent(R.layout.activity_user_identified);
     }
 
     private void showAuthenticationScreen() {
